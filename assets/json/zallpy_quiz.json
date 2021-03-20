@@ -1,0 +1,55 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "question": "BMW",
+            "correct": "Germany",
+            "answers": [
+                "England",
+                "USA",
+                "Germany",
+                "Japan"
+            ]
+        },
+        {
+            "question": "Toyota",
+            "correct": "Japan",
+            "answers": [
+                "England",
+                "USA",
+                "Germany",
+                "Japan"
+            ]
+        },
+        {
+            "question": "Mini",
+            "correct": "England",
+            "answers": [
+                "England",
+                "USA",
+                "Germany",
+                "Japan"
+            ]
+        },
+        {
+            "question": "General Motors",
+            "correct": "USA",
+            "answers": [
+                "England",
+                "USA",
+                "Germany",
+                "Japan"
+            ]
+        },
+        {
+            "question": "Rolls-Royce",
+            "correct": "England",
+            "answers": [
+                "England",
+                "USA",
+                "Germany",
+                "Japan"
+            ]
+        }
+    ]
+}
