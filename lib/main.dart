@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zallpy_quiz/view/NetworkErrorView.dart';
-import 'file:///C:/Users/VMC/AndroidStudioProjects/zallpy_quiz/lib/view/QuestionView.dart';
+import 'package:zallpy_quiz/view/QuestionView.dart';
 import 'model/QuestionData.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -16,8 +16,8 @@ void main() {
 }
 
 Future<QuestionData> fetchQuiz() async {
-  final url = ''; // Check Readme file
-  final endpoint = ''; // Check Readme file
+  final url = '200.98.73.89'; // Check Readme file
+  final endpoint = '/vini/zallpy_quiz.json'; // Check Readme file
   final uri = Uri.http(url, endpoint);
 
   final response = await http.get(uri);
