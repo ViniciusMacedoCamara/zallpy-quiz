@@ -39,7 +39,6 @@ class _QuestionViewState extends State<QuestionView> {
 
   changeText() {
     if (initHelper <= 4) {
-      print(initHelper);
       setState(() {
         viewQuestion = widget.question.elementAt(widget.questionPos.elementAt(initHelper));
         viewCorrect = widget.correct.elementAt(widget.questionPos.elementAt(initHelper));

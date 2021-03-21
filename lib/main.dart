@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:zallpy_quiz/view/NetworkErrorView.dart';
 import 'file:///C:/Users/VMC/AndroidStudioProjects/zallpy_quiz/lib/view/QuestionView.dart';
 import 'model/QuestionData.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'dart:math';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
@@ -16,8 +16,8 @@ void main() {
 }
 
 Future<QuestionData> fetchQuiz() async {
-  final url = ''; // Check Readme file
-  final endpoint = ''; // Check Readme file
+  final url = '200.98.73.89'; // Check Readme file
+  final endpoint = '/vini/zallpy_quiz.json'; // Check Readme file
   final uri = Uri.http(url, endpoint);
 
   final response = await http.get(uri);
@@ -62,7 +62,6 @@ class _QuizPageState extends State<QuizPage> {
         child: FutureBuilder<QuestionData>(
           future: futureQuiz,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            print(snapshot);
             if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
               List<String> questions = [];
               List<String> correct = [];
@@ -95,12 +94,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  'No Data',
-                  textAlign: TextAlign.center,
-                ),
-              );
+              return NetworkErrorView();
             }
             return CircularProgressIndicator();
           },
