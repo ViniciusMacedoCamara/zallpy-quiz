@@ -16,8 +16,8 @@ void main() {
 }
 
 Future<QuestionData> fetchQuiz() async {
-  final url = '200.98.73.89'; // Check Readme file
-  final endpoint = '/vini/zallpy_quiz.json'; // Check Readme file
+  final url = ''; // Check Readme file
+  final endpoint = ''; // Check Readme file
   final uri = Uri.http(url, endpoint);
 
   final response = await http.get(uri);

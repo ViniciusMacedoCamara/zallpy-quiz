@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vmc.zallpy_quiz">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="zallpy_quiz"
         android:icon="@mipmap/ic_launcher">
