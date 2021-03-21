@@ -6,11 +6,15 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'dart:math';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(
-    Phoenix(
-      child: Zallpy(),
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (value) => runApp(
+      Phoenix(
+        child: Zallpy(),
+      ),
     ),
   );
 }
