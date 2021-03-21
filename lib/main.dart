@@ -5,12 +5,19 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'dart:math';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(Phoenix(child: Zallpy()));
+  runApp(
+    Phoenix(
+      child: Zallpy(),
+    ),
+  );
 }
 
 Future<QuestionData> fetchQuiz() async {
+  final url = ''; // Check Readme file
+  final endpoint = ''; // Check Readme file
   final uri = Uri.http(url, endpoint);
 
   final response = await http.get(uri);
@@ -50,6 +57,7 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff262b41),
       body: Center(
         child: FutureBuilder<QuestionData>(
           future: futureQuiz,

@@ -1,6 +1,12 @@
 # zallpy_quiz
 
-A Flutter application for Zallpy quiz techincal test.
+A Flutter application for Zallpy quiz technical test.
+
+## Notes
+
+If you are from Zallpy, I send the `url` and `endpoint` info through e-mail, please double check that.
+
+If you are not from Zallpy and want to test this, please send me an email or DM to get access to the `url` and `endpoint`
 
 ## Getting Started
 

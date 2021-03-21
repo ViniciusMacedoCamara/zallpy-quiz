@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionView extends StatefulWidget {
   final List questionPos;
@@ -25,6 +26,7 @@ class _QuestionViewState extends State<QuestionView> {
   int correctCounter = 0;
   double percentage = 0;
   bool isLast = false;
+  final TextStyle textStyle = GoogleFonts.montserrat(fontSize: 18.0, fontWeight: FontWeight.w500);
 
   @override
   void initState() {
@@ -68,7 +70,9 @@ class _QuestionViewState extends State<QuestionView> {
             center: Text('$percentage'),
             footer: Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: Text('You got it right $correctCounter out of $posHelper questions!'),
+              child: Text(
+                'You got it right $correctCounter out of $posHelper questions!',
+              ),
             ),
             progressColor: Colors.green,
           ),
@@ -103,9 +107,26 @@ class _QuestionViewState extends State<QuestionView> {
           child: Padding(
             padding: EdgeInsets.all(16.0),
             child: Center(
-              child: Text(
-                'In which country\n' + viewQuestion + '\nwas created?',
-                textAlign: TextAlign.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'In which country',
+                    style: GoogleFonts.montserrat(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.white70),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    '$viewQuestion',
+                    style: GoogleFonts.montserrat(fontSize: 36.0, fontWeight: FontWeight.w500, color: Color(0xff35F02B)),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'was created?',
+                    style: GoogleFonts.montserrat(fontSize: 14.0, fontWeight: FontWeight.w500, color: Colors.white70),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
           ),
@@ -118,29 +139,73 @@ class _QuestionViewState extends State<QuestionView> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  ElevatedButton(
-                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[0]),
-                    onPressed: () {
-                      score(0);
-                    },
+                  SizedBox(
+                    height: 40.0,
+                    child: ElevatedButton(
+                      child: Text(
+                        widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[0],
+                        style: textStyle,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff333956),
+                        onPrimary: Colors.white,
+                        elevation: 5,
+                      ),
+                      onPressed: () {
+                        score(0);
+                      },
+                    ),
                   ),
-                  ElevatedButton(
-                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[1]),
-                    onPressed: () {
-                      score(1);
-                    },
+                  SizedBox(
+                    height: 40.0,
+                    child: ElevatedButton(
+                      child: Text(
+                        widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[1],
+                        style: textStyle,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff333956),
+                        onPrimary: Colors.white,
+                        elevation: 5,
+                      ),
+                      onPressed: () {
+                        score(1);
+                      },
+                    ),
                   ),
-                  ElevatedButton(
-                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[2]),
-                    onPressed: () {
-                      score(2);
-                    },
+                  SizedBox(
+                    height: 40.0,
+                    child: ElevatedButton(
+                      child: Text(
+                        widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[2],
+                        style: textStyle,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff333956),
+                        onPrimary: Colors.white,
+                        elevation: 5,
+                      ),
+                      onPressed: () {
+                        score(2);
+                      },
+                    ),
                   ),
-                  ElevatedButton(
-                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[3]),
-                    onPressed: () {
-                      score(3);
-                    },
+                  SizedBox(
+                    height: 40.0,
+                    child: ElevatedButton(
+                      child: Text(
+                        widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[3],
+                        style: textStyle,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff333956),
+                        onPrimary: Colors.white,
+                        elevation: 5,
+                      ),
+                      onPressed: () {
+                        score(3);
+                      },
+                    ),
                   ),
                 ],
               ),
