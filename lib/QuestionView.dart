@@ -18,10 +18,10 @@ class QuestionView extends StatefulWidget {
   final List question;
   final List correct;
   final List answer;
-  int inic;
-  int itemcount;
+  int init;
+  int itemCount;
 
-  QuestionView({Key key, this.questionPos, this.question, this.correct, this.answer, this.inic, this.itemcount}) : super(key: key);
+  QuestionView({Key key, this.questionPos, this.question, this.correct, this.answer, this.init, this.itemCount}) : super(key: key);
   @override
   _QuestionViewState createState() => _QuestionViewState();
 }
@@ -31,40 +31,34 @@ class _QuestionViewState extends State<QuestionView> {
   String viewCorrect;
   String viewAnswer;
   int posHelper;
-  int inicHelper = 0;
+  int initHelper = 0;
   int correctCounter = 0;
-  double test = 0;
+  double percentage = 0;
   bool isLast = false;
-
-  // QuestionData questionData;
 
   @override
   void initState() {
-    inicHelper = 0;
+    initHelper = 0;
     posHelper = widget.questionPos.length;
-
-    print(widget.itemcount);
-
-    viewQuestion = widget.question.elementAt(widget.questionPos.elementAt(widget.inic));
-    viewCorrect = widget.correct.elementAt(widget.questionPos.elementAt(widget.inic));
-
+    viewQuestion = widget.question.elementAt(widget.questionPos.elementAt(widget.init));
+    viewCorrect = widget.correct.elementAt(widget.questionPos.elementAt(widget.init));
     changeText();
   }
 
   changeText() {
-    if (inicHelper <= 4) {
-      print(inicHelper);
+    if (initHelper <= 4) {
+      print(initHelper);
       setState(() {
-        viewQuestion = widget.question.elementAt(widget.questionPos.elementAt(inicHelper));
-        viewCorrect = widget.correct.elementAt(widget.questionPos.elementAt(inicHelper));
+        viewQuestion = widget.question.elementAt(widget.questionPos.elementAt(initHelper));
+        viewCorrect = widget.correct.elementAt(widget.questionPos.elementAt(initHelper));
       });
-      if (inicHelper == 4) {
+      if (initHelper == 4) {
         isLast = true;
-        inicHelper--;
+        initHelper--;
       } else {
-        inicHelper++;
+        initHelper++;
         if (isLast) {
-          test = this.correctCounter / widget.questionPos.length * 100;
+          percentage = this.correctCounter / widget.questionPos.length * 100;
           _showDialog();
         }
       }
@@ -75,29 +69,23 @@ class _QuestionViewState extends State<QuestionView> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        // retorna um objeto do tipo Dialog
         return AlertDialog(
           title: Text('Quiz Completed'),
           content: CircularPercentIndicator(
             radius: 150.0,
             lineWidth: 20.0,
-            percent: 0.7,
-            center: Text('$test'),
-            footer: Text('You '),
+            percent: correctCounter / widget.questionPos.length,
+            center: Text('$percentage'),
+            footer: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+              child: Text('You got it right $correctCounter out of $posHelper questions!'),
+            ),
             progressColor: Colors.green,
           ),
           actions: <Widget>[
-            // define os botões na base do dialogo
             TextButton(
               child: Text('Play Again'),
               onPressed: () {
-                //limpar contador
-                // inicHelper = 0;
-                // correctCounter = 0;
-                // isLast = false;
-                //chamar change text
-                // main();
-                // initState();
                 Phoenix.rebirth(context);
                 Navigator.of(context).pop();
               },
@@ -109,10 +97,8 @@ class _QuestionViewState extends State<QuestionView> {
   }
 
   score(int i) {
-    if (viewCorrect == widget.answer.elementAt(widget.questionPos.elementAt(inicHelper))[i]) {
+    if (viewCorrect == widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[i]) {
       this.correctCounter++;
-    } else {
-      print('errado\n');
     }
     changeText();
   }
@@ -128,7 +114,7 @@ class _QuestionViewState extends State<QuestionView> {
             padding: EdgeInsets.all(16.0),
             child: Center(
               child: Text(
-                'In which country\n' + viewQuestion + '\nwas created?\n$viewCorrect - $viewAnswer',
+                'In which country\n' + viewQuestion + '\nwas created?',
                 textAlign: TextAlign.center,
               ),
             ),
@@ -143,26 +129,25 @@ class _QuestionViewState extends State<QuestionView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   ElevatedButton(
-                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(inicHelper))[0]),
+                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[0]),
                     onPressed: () {
                       score(0);
-                      // _showDialog();
                     },
                   ),
                   ElevatedButton(
-                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(inicHelper))[1]),
+                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[1]),
                     onPressed: () {
                       score(1);
                     },
                   ),
                   ElevatedButton(
-                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(inicHelper))[2]),
+                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[2]),
                     onPressed: () {
                       score(2);
                     },
                   ),
                   ElevatedButton(
-                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(inicHelper))[3]),
+                    child: Text(widget.answer.elementAt(widget.questionPos.elementAt(initHelper))[3]),
                     onPressed: () {
                       score(3);
                     },
