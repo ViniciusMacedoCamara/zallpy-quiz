@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zallpy_quiz/QuestionView.dart';
-import 'QuestionData.dart';
+import 'file:///C:/Users/VMC/AndroidStudioProjects/zallpy_quiz/lib/view/QuestionView.dart';
+import 'model/QuestionData.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'dart:math';
