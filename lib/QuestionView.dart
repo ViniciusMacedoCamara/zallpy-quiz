@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:zallpy_quiz/main.dart';
-import 'QuestionData.dart';
-import 'Question.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
-import 'dart:math';
-import 'package:zallpy_quiz/QuestionData.dart';
-import 'dart:developer' as dev;
-import 'QuestionData.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
