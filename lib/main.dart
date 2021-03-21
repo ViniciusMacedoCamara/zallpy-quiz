@@ -6,12 +6,16 @@ import 'Question.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'dart:math';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() {
-  runApp(Zallpy());
+  runApp(Phoenix(child: Zallpy()));
 }
 
 Future<QuestionData> fetchQuiz() async {
+  final url = '200.98.73.89';
+  // final endpoint = '/vini/zallpy_data.json';
+  final endpoint = '/vini/zallpy_quiz.json';
   final uri = Uri.http(url, endpoint);
 
   final response = await http.get(uri);
@@ -58,79 +62,78 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<QuestionData>(
-        future: futureQuiz,
-        builder: (context, snapshot) {
-          print(snapshot);
-          if (snapshot.hasData) {
-            List<String> questions = [];
-            List<String> correct = [];
-            List answer = [];
-            List data = [];
-            List<int> questionRandomizer = [];
-            Random random = new Random();
-
-            while (questionRandomizer.length <= 4) {
-              int random_number = random.nextInt(5);
-              if (!questionRandomizer.contains(random_number)) {
-                questionRandomizer.add(random_number);
-              }
-            }
-            // print(questionRandomizer);
-            // print(snapshot.data.results.elementAt(0).answers.length);
-            var tam = snapshot.data.results.length;
-            print(tam);
-
-            for (var i = 0; i < tam; i++) {
-              for (var j = 0; j < snapshot.data.results.elementAt(0).answers.length; j++) {
-                var dataFields = {
-                  'question': snapshot.data.results.elementAt(i).question,
-                  'correct': snapshot.data.results.elementAt(i).correct,
-                  'answer': snapshot.data.results.elementAt(j).answers,
-                };
-                data.add(dataFields);
-              }
-            }
-
-            for (var i = 0; i < tam; i++) {
-              questions.add(snapshot.data.results.elementAt(i).question);
-              correct.add(snapshot.data.results.elementAt(i).correct);
-              // for (var j = 0; j < snapshot.data.results.elementAt(0).answers.length; j++) {
-              answer.add(snapshot.data.results.elementAt(i).answers);
+      body: Center(
+        child: FutureBuilder<QuestionData>(
+          future: futureQuiz,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            print(snapshot);
+            if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+              // int c = 0;
+              // print('mds $c');
+              // if (snapshot.connectionState == ConnectionState.done) {
+              //   c++;
               // }
+              // print('mds que merda $c');
+              List<String> questions = [];
+              List<String> correct = [];
+              List answer = [];
+              List data = [];
+              List<int> questionRandomizer = [];
+              Random random = new Random();
+
+              while (questionRandomizer.length <= 4) {
+                int random_number = random.nextInt(5);
+                if (!questionRandomizer.contains(random_number)) {
+                  questionRandomizer.add(random_number);
+                }
+              }
+
+              print(questionRandomizer.length);
+              print('aaaa - - - $questionRandomizer');
+
+              // print(snapshot.data.results.elementAt(0).answers.length);
+              var tam = snapshot.data.results.length;
+              // print(tam);
+
+              // for (var i = 0; i < tam; i++) {
+              //   for (var j = 0; j < snapshot.data.results.elementAt(0).answers.length; j++) {
+              //     var dataFields = {
+              //       'question': snapshot.data.results.elementAt(i).question,
+              //       'correct': snapshot.data.results.elementAt(i).correct,
+              //       'answer': snapshot.data.results.elementAt(j).answers,
+              //     };
+              //     data.add(dataFields);
+              //   }
+              // }
+
+              for (var i = 0; i < tam; i++) {
+                questions.add(snapshot.data.results.elementAt(i).question);
+                correct.add(snapshot.data.results.elementAt(i).correct);
+                answer.add(snapshot.data.results.elementAt(i).answers);
+              }
+
+              return SafeArea(
+                child: QuestionView(
+                  questionPos: questionRandomizer,
+                  // question: data,
+                  itemcount: questionRandomizer.length,
+                  question: questions,
+                  correct: correct,
+                  answer: answer,
+                  inic: 0,
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  'No Data',
+                  textAlign: TextAlign.center,
+                ),
+              );
             }
-
-            var q = snapshot.data.results.elementAt(questionRandomizer[0]).question;
-            // for (var i = 0; i <= 3; i++) {
-            //   q = snapshot.data.results.elementAt(questionRandomizer[i]).question;
-            //   print(q);
-            // }
-
-            // print(q);
-
-            var a = snapshot.data.results.elementAt(0).answers;
-
-            // print(questionRandomizer);
-            //[] passadas
-            return SafeArea(
-              child: QuestionView(
-                questionPos: questionRandomizer,
-                // question: data,
-                question: questions,
-                correct: correct,
-                answer: answer,
-                inic: 0,
-              ),
-            );
-          } else {
-            return Center(
-              child: Text(
-                'No Data',
-                textAlign: TextAlign.center,
-              ),
-            );
-          }
-        },
+            return CircularProgressIndicator();
+          },
+        ),
       ),
     );
   }
