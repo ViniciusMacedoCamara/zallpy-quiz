@@ -26,6 +26,7 @@ class _QuestionViewState extends State<QuestionView> {
   int correctCounter = 0;
   double percentage = 0;
   bool isLast = false;
+  String viewPercentage;
   final TextStyle textStyle = GoogleFonts.montserrat(fontSize: 18.0, fontWeight: FontWeight.w500);
 
   @override
@@ -50,6 +51,7 @@ class _QuestionViewState extends State<QuestionView> {
         initHelper++;
         if (isLast) {
           percentage = this.correctCounter / widget.questionPos.length * 100;
+          viewPercentage = percentage.toString().replaceAll(RegExp(r"([.]*0)(?!.*\d)"), "");
           _showDialog();
         }
       }
@@ -66,7 +68,7 @@ class _QuestionViewState extends State<QuestionView> {
             radius: 150.0,
             lineWidth: 20.0,
             percent: correctCounter / widget.questionPos.length,
-            center: Text('$percentage'),
+            center: Text('$viewPercentage %'),
             footer: Padding(
               padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
               child: Text(
