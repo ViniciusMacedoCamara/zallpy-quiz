@@ -2,6 +2,9 @@
 
 A Flutter application for Zallpy quiz technical test.
 
+## Please run this app under API 28
+https://flutter.dev/docs/release/breaking-changes/network-policy-ios-android
+
 ## Notes
 
 If you are from Zallpy, I send the `url` and `endpoint` info through e-mail, please double check that.
